@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/data/nameIndex.circulatory.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.circulatory.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId (heart, aorta, lungs, ...). Completa esto con los obj.name reales.&quot;,&#10;  &quot;Heart&quot;: &quot;heart&quot;,&#10;  &quot;heart&quot;: &quot;heart&quot;,&#10;  &quot;Aorta&quot;: &quot;aorta&quot;,&#10;  &quot;aorta&quot;: &quot;aorta&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/data/nameIndex.digestive.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.digestive.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId. Completa esto con los obj.name reales.&quot;,&#10;  &quot;Stomach&quot;: &quot;stomach&quot;,&#10;  &quot;stomach&quot;: &quot;stomach&quot;,&#10;  &quot;Liver&quot;: &quot;liver&quot;,&#10;  &quot;liver&quot;: &quot;liver&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/data/nameIndex.lymphatic.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.lymphatic.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId. Completa esto con los obj.name reales. (Ejemplo)&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/data/nameIndex.male-reproductive.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.male-reproductive.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId. Completa esto con los obj.name reales. (Ejemplo)&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/data/nameIndex.muscular.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.muscular.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId. Completa esto con los obj.name reales. (Ejemplo)&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/data/nameIndex.nervous.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.nervous.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId. Completa esto con los obj.name reales. Estos son placeholders típicos.&quot;,&#10;  &quot;Brain&quot;: &quot;brain&quot;,&#10;  &quot;brain&quot;: &quot;brain&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/data/nameIndex.respiratory.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/data/nameIndex.respiratory.json" />
+              <option name="updatedContent" value="{&#10;  &quot;__comment&quot;: &quot;Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -&gt; conceptId. Completa esto con los obj.name reales.&quot;,&#10;  &quot;Lungs&quot;: &quot;lungs&quot;,&#10;  &quot;lungs&quot;: &quot;lungs&quot;&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

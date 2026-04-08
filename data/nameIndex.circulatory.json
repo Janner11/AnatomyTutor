@@ -1,0 +1,8 @@
+{
+  "__comment": "Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -> conceptId (heart, aorta, lungs, ...). Completa esto con los obj.name reales.",
+  "Heart": "heart",
+  "heart": "heart",
+  "Aorta": "aorta",
+  "aorta": "aorta"
+}
+

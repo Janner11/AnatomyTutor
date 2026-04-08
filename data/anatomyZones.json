@@ -1,0 +1,29 @@
+{
+  "__deprecated": "Este archivo fue eliminado. Las posiciones de organos ya no se inventan con proporciones heuristicas. Toda la informacion espacial (centroide, bounding box, bounding sphere) se calcula en tiempo real desde la geometria real del GLB mediante js/modelSpatialIndex.js. Para mapear mesh names a anatomy IDs, usa data/nameIndex.{system}.json."
+}
+Centros y radios de zona de cada organo en coordenadas del modelo (metros). 'heart' calibrado con referencia real del modelo (pointWorld confirmado: [-0.0186, 1.3578, -0.0211]). El resto calculado con proporciones anatomicas estandar (modelo ~1.7 m, pies en y~0). Ajusta 'center' y 'radius' a medida que confirmes con cada modelo.",
+
+  "heart": { "center": [-0.0186, 1.3578, -0.0211], "radius": 0.075 },
+  "aorta": { "center": [-0.01, 1.28, -0.035], "radius": 0.05 },
+
+  "lungs": { "center": [0.0, 1.385, -0.018], "radius": 0.135 },
+  "trachea": { "center": [0.0, 1.5, -0.015], "radius": 0.04 },
+
+  "brain": { "center": [0.0, 1.655, 0.0], "radius": 0.095 },
+  "skull": { "center": [0.0, 1.652, 0.0], "radius": 0.108 },
+
+  "liver": { "center": [0.09, 1.185, -0.025], "radius": 0.09 },
+  "stomach": { "center": [-0.04, 1.155, -0.025], "radius": 0.072 },
+  "spleen": { "center": [-0.11, 1.17, -0.035], "radius": 0.052 },
+  "pancreas": { "center": [-0.02, 1.115, -0.05], "radius": 0.055 },
+
+  "kidney": { "center": [0.0, 1.08, -0.06], "radius": 0.075 },
+  "ureter": { "center": [0.0, 0.93, -0.04], "radius": 0.065 },
+  "bladder": { "center": [0.0, 0.775, -0.02], "radius": 0.055 },
+  "urethra": { "center": [0.0, 0.71, -0.01], "radius": 0.04 },
+
+  "intestine_small": { "center": [0.0, 0.97, -0.01], "radius": 0.12 },
+  "intestine_large": { "center": [0.0, 0.92, -0.01], "radius": 0.135 },
+
+  "skeleton": { "center": [0.0, 0.88, 0.0], "radius": 0.5 }
+}

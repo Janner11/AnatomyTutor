@@ -1,0 +1,312 @@
+{
+  "heart": {
+    "title": "Corazón",
+    "summary": "Bomba muscular principal del sistema circulatorio.",
+    "funcion": "Mantiene el flujo sanguíneo hacia pulmones y tejidos."
+  },
+  "aorta": {
+    "title": "Aorta",
+    "summary": "Arteria de mayor calibre que sale del ventrículo izquierdo.",
+    "funcion": "Distribuye sangre oxigenada al cuerpo."
+  },
+  "superior_vena_cava": {
+    "title": "Vena Cava Superior",
+    "summary": "Vena grande que recoge sangre de cabeza y miembros superiores.",
+    "funcion": "Retorna sangre desoxigenada a la aurícula derecha."
+  },
+  "inferior_vena_cava": {
+    "title": "Vena Cava Inferior",
+    "summary": "Vena principal que drena abdomen, pelvis y piernas.",
+    "funcion": "Devuelve sangre desoxigenada al corazón."
+  },
+  "femoral_artery": {
+    "title": "Arteria Femoral",
+    "summary": "Arteria principal del muslo.",
+    "funcion": "Irriga el miembro inferior."
+  },
+  "femoral_vein": {
+    "title": "Vena Femoral",
+    "summary": "Vena profunda del muslo.",
+    "funcion": "Drena sangre del miembro inferior hacia el tronco."
+  },
+  "mouth": {
+    "title": "Boca",
+    "summary": "Entrada del tubo digestivo.",
+    "funcion": "Inicia digestión mecánica y mezcla con saliva."
+  },
+  "salivary_glands": {
+    "title": "Glándulas Salivales",
+    "summary": "Glándulas exocrinas que producen saliva.",
+    "funcion": "Lubrican el bolo alimenticio e inician digestión de carbohidratos."
+  },
+  "esophagus": {
+    "title": "Esófago",
+    "summary": "Conducto muscular entre faringe y estómago.",
+    "funcion": "Transporta el bolo alimenticio por peristalsis."
+  },
+  "stomach": {
+    "title": "Estómago",
+    "summary": "Cámara muscular donde se mezcla el alimento con jugos gástricos.",
+    "funcion": "Inicia digestión química de proteínas y regula vaciamiento gástrico."
+  },
+  "liver": {
+    "title": "Hígado",
+    "summary": "Glándula metabólica más grande del organismo.",
+    "funcion": "Produce bilis, metaboliza nutrientes y detoxifica sangre."
+  },
+  "intestine_small": {
+    "title": "Intestino Delgado",
+    "summary": "Tramo largo y plegado del sistema digestivo.",
+    "funcion": "Absorbe la mayor parte de nutrientes."
+  },
+  "intestine_large": {
+    "title": "Intestino Grueso",
+    "summary": "Segmento final del intestino.",
+    "funcion": "Reabsorbe agua y compacta heces."
+  },
+  "rectum": {
+    "title": "Recto",
+    "summary": "Porción terminal del intestino grueso.",
+    "funcion": "Almacena heces hasta la defecación."
+  },
+  "tonsils": {
+    "title": "Amígdalas",
+    "summary": "Tejido linfoide en la faringe.",
+    "funcion": "Defensa inmunitaria frente a patógenos inhalados o ingeridos."
+  },
+  "cervical_lymph_nodes": {
+    "title": "Ganglios Cervicales",
+    "summary": "Ganglios linfáticos del cuello.",
+    "funcion": "Filtran linfa de cabeza y cuello."
+  },
+  "thymus": {
+    "title": "Timo",
+    "summary": "Órgano linfoide del mediastino anterior.",
+    "funcion": "Maduración de linfocitos T."
+  },
+  "axillary_lymph_nodes": {
+    "title": "Ganglios Axilares",
+    "summary": "Conjunto ganglionar en axila.",
+    "funcion": "Drena linfa de miembro superior, pared torácica y mama."
+  },
+  "spleen": {
+    "title": "Bazo",
+    "summary": "Órgano linfoide del hipocondrio izquierdo.",
+    "funcion": "Filtra sangre, recicla eritrocitos y participa en la respuesta inmune."
+  },
+  "inguinal_lymph_nodes": {
+    "title": "Ganglios Inguinales",
+    "summary": "Ganglios en la región inguinal.",
+    "funcion": "Drenan linfa de miembros inferiores y pelvis superficial."
+  },
+  "popliteal_lymph_nodes": {
+    "title": "Ganglios Poplíteos",
+    "summary": "Ganglios detrás de la rodilla.",
+    "funcion": "Filtran linfa de la pierna distal y pie."
+  },
+  "testicle": {
+    "title": "Testículo",
+    "summary": "Gónada masculina ubicada en el escroto.",
+    "funcion": "Produce espermatozoides y testosterona."
+  },
+  "epididymis": {
+    "title": "Epidídimo",
+    "summary": "Conducto adherido al testículo.",
+    "funcion": "Maduración y almacenamiento inicial de espermatozoides."
+  },
+  "vas_deferens": {
+    "title": "Conducto Deferente",
+    "summary": "Tubo muscular que conecta epidídimo y vías eyaculadoras.",
+    "funcion": "Transporta espermatozoides durante la eyaculación."
+  },
+  "seminal_vesicle": {
+    "title": "Vesícula Seminal",
+    "summary": "Glándula accesoria del aparato reproductor masculino.",
+    "funcion": "Aporta líquido rico en fructosa al semen."
+  },
+  "prostate": {
+    "title": "Próstata",
+    "summary": "Glándula bajo la vejiga.",
+    "funcion": "Secreta líquido prostático que favorece movilidad espermática."
+  },
+  "penis": {
+    "title": "Pene",
+    "summary": "Órgano copulador y vía urinaria distal.",
+    "funcion": "Permite micción y eyaculación."
+  },
+  "trapezius": {
+    "title": "Trapecio",
+    "summary": "Músculo superficial de cuello y espalda alta.",
+    "funcion": "Eleva, retrae y rota la escápula."
+  },
+  "deltoid": {
+    "title": "Deltoides",
+    "summary": "Músculo del hombro que cubre la articulación glenohumeral.",
+    "funcion": "Abduce y estabiliza el brazo."
+  },
+  "pectoralis": {
+    "title": "Pectoral Mayor",
+    "summary": "Músculo anterior del tórax.",
+    "funcion": "Aduce, rota internamente y flexiona el húmero."
+  },
+  "biceps": {
+    "title": "Bíceps Braquial",
+    "summary": "Músculo anterior del brazo.",
+    "funcion": "Flexiona el codo y supina el antebrazo."
+  },
+  "triceps": {
+    "title": "Tríceps Braquial",
+    "summary": "Músculo posterior del brazo.",
+    "funcion": "Extiende el codo."
+  },
+  "oblique": {
+    "title": "Oblicuos",
+    "summary": "Músculos laterales del abdomen.",
+    "funcion": "Rotación y flexión lateral del tronco; soporte de la pared abdominal."
+  },
+  "quadriceps": {
+    "title": "Cuádriceps",
+    "summary": "Grupo muscular anterior del muslo.",
+    "funcion": "Extiende la rodilla y contribuye a la marcha."
+  },
+  "hamstrings": {
+    "title": "Isquiotibiales",
+    "summary": "Grupo muscular posterior del muslo.",
+    "funcion": "Flexionan la rodilla y extienden la cadera."
+  },
+  "brain": {
+    "title": "Cerebro",
+    "summary": "Órgano central del sistema nervioso.",
+    "funcion": "Integra información sensorial y dirige funciones motoras y cognitivas."
+  },
+  "spinal_cord": {
+    "title": "Médula Espinal",
+    "summary": "Cordón nervioso dentro del canal vertebral.",
+    "funcion": "Conduce señales entre encéfalo y cuerpo; coordina reflejos."
+  },
+  "intercostal_nerves": {
+    "title": "Nervios Intercostales",
+    "summary": "Ramas nerviosas torácicas entre costillas.",
+    "funcion": "Inervan músculos intercostales y piel del tórax."
+  },
+  "median_nerve": {
+    "title": "Nervio Mediano",
+    "summary": "Nervio principal del miembro superior anterior.",
+    "funcion": "Controla parte de la flexión de muñeca y sensibilidad palmar."
+  },
+  "femoral_nerve": {
+    "title": "Nervio Femoral",
+    "summary": "Nervio del compartimento anterior del muslo.",
+    "funcion": "Permite extensión de rodilla y sensibilidad anteromedial del muslo/pierna."
+  },
+  "sciatic_nerve": {
+    "title": "Nervio Ciático",
+    "summary": "Nervio más grande del cuerpo.",
+    "funcion": "Inerva gran parte de la pierna y pie mediante sus ramas."
+  },
+  "tibial_nerve": {
+    "title": "Nervio Tibial",
+    "summary": "Rama terminal del ciático.",
+    "funcion": "Controla musculatura posterior de pierna y sensibilidad plantar."
+  },
+  "nasal_cavity": {
+    "title": "Cavidad Nasal",
+    "summary": "Vía aérea superior interna de la nariz.",
+    "funcion": "Filtra, humedece y calienta el aire inspirado."
+  },
+  "oral_cavity": {
+    "title": "Cavidad Oral",
+    "summary": "Espacio interno de la boca.",
+    "funcion": "Vía respiratoria alternativa y participación en fonación."
+  },
+  "larynx": {
+    "title": "Laringe",
+    "summary": "Estructura cartilaginosa entre faringe y tráquea.",
+    "funcion": "Conduce aire y produce la voz."
+  },
+  "trachea": {
+    "title": "Tráquea",
+    "summary": "Conducto respiratorio con anillos cartilaginosos.",
+    "funcion": "Transporta aire hacia bronquios."
+  },
+  "lungs": {
+    "title": "Pulmones",
+    "summary": "Órganos respiratorios principales.",
+    "funcion": "Intercambio de oxígeno y dióxido de carbono."
+  },
+  "diaphragm": {
+    "title": "Diafragma",
+    "summary": "Músculo respiratorio principal entre tórax y abdomen.",
+    "funcion": "Permite inspiración al descender y expandir el tórax."
+  },
+  "skull": {
+    "title": "Cráneo",
+    "summary": "Conjunto óseo de la cabeza.",
+    "funcion": "Protege el encéfalo y da soporte a la cara."
+  },
+  "spine": {
+    "title": "Columna Vertebral",
+    "summary": "Eje óseo formado por vértebras.",
+    "funcion": "Soporta el tronco y protege la médula espinal."
+  },
+  "rib_cage": {
+    "title": "Caja Torácica",
+    "summary": "Conjunto de costillas y esternón.",
+    "funcion": "Protege corazón y pulmones, y colabora en respiración."
+  },
+  "humerus": {
+    "title": "Húmero",
+    "summary": "Hueso largo del brazo.",
+    "funcion": "Conecta hombro y codo; sirve de palanca para movimientos."
+  },
+  "radius": {
+    "title": "Radio",
+    "summary": "Hueso lateral del antebrazo.",
+    "funcion": "Participa en pronación/supinación y estabilidad de muñeca."
+  },
+  "ulna": {
+    "title": "Ulna (Cúbito)",
+    "summary": "Hueso medial del antebrazo.",
+    "funcion": "Aporta estabilidad al codo y antebrazo."
+  },
+  "pelvis": {
+    "title": "Pelvis",
+    "summary": "Complejo óseo de unión entre tronco y miembros inferiores.",
+    "funcion": "Transmite cargas y protege vísceras pélvicas."
+  },
+  "femur": {
+    "title": "Fémur",
+    "summary": "Hueso más largo y resistente del cuerpo.",
+    "funcion": "Soporta peso corporal y permite locomoción."
+  },
+  "tibia": {
+    "title": "Tibia",
+    "summary": "Hueso principal medial de la pierna.",
+    "funcion": "Soporta gran parte de la carga en bipedestación."
+  },
+  "fibula": {
+    "title": "Fíbula (Peroné)",
+    "summary": "Hueso lateral de la pierna.",
+    "funcion": "Estabiliza el tobillo y sirve de inserción muscular."
+  },
+  "kidney": {
+    "title": "Riñón",
+    "summary": "Órgano retroperitoneal en forma de frijol.",
+    "funcion": "Filtra sangre y regula equilibrio hídrico-electrolítico."
+  },
+  "ureter": {
+    "title": "Uréter",
+    "summary": "Conducto muscular entre riñón y vejiga.",
+    "funcion": "Transporta orina por peristalsis."
+  },
+  "bladder": {
+    "title": "Vejiga Urinaria",
+    "summary": "Reservorio muscular pélvico para orina.",
+    "funcion": "Almacena orina hasta la micción."
+  },
+  "urethra": {
+    "title": "Uretra",
+    "summary": "Conducto final del sistema urinario.",
+    "funcion": "Expulsa la orina al exterior."
+  }
+}

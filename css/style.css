@@ -1,0 +1,700 @@
+/*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
+
+/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+:root {
+  /* Paleta elegante y amigable */
+  --color-bg: #f8fafc;
+  --color-panel: rgba(255, 255, 255, 0.92);
+  --color-primary: #3b82f6;
+  --color-primary-light: #60a5fa;
+  --color-primary-soft: #dbeafe;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-text-dark: #1e293b;
+  --color-text-soft: #334155;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  --z-canvas: 1;
+  --z-webcam: 30;
+  --z-panel: 40;
+  --z-toggle: 45;
+}
+
+html {
+  color: var(--color-text-dark);
+  font-size: 1em;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   Selection & horizontal rule
+   ========================================================================== */
+::-moz-selection {
+  background: var(--color-primary-soft);
+  color: var(--color-text-dark);
+  text-shadow: none;
+}
+::selection {
+  background: var(--color-primary-soft);
+  color: var(--color-text-dark);
+  text-shadow: none;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Media elements
+   ========================================================================== */
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Author's custom styles – Elegant, clean & friendly
+   ========================================================================== */
+
+body {
+  margin: 0;
+  background: linear-gradient(145deg, #f0f4fa 0%, #e6edf5 100%);
+  font-family: var(--font-sans);
+  color: var(--color-text-soft);
+}
+
+#app,
+#app canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-canvas);
+}
+
+/* ==========================================================================
+   Main control panel – Clean glassmorphism
+   ========================================================================== */
+.atlas-panel {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: var(--z-panel);
+  width: min(340px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--color-panel);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.atlas-panel-hidden {
+  transform: translateX(-400px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Toggle Panel Button */
+.atlas-panel-toggle {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: var(--z-toggle);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-panel);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.atlas-panel-toggle:hover {
+  background: white;
+  color: var(--color-primary-light);
+}
+
+.atlas-panel-toggle-active {
+  background: #ffffff;
+}
+
+.atlas-panel-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* El boton usa una clase en body para evitar dependencias fragiles de orden DOM */
+body.atlas-panel-open .atlas-panel-toggle {
+  left: calc(24px + min(340px, calc(100vw - 48px)) + 12px);
+}
+
+
+/* Scroll personalizado (sutil) */
+.atlas-panel::-webkit-scrollbar {
+  width: 4px;
+}
+.atlas-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.atlas-panel::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+
+/* Títulos */
+.atlas-title {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.atlas-title::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' /%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.atlas-subtitle {
+  margin: 0 0 24px 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  border-left: 2px solid var(--color-primary-light);
+  padding-left: 12px;
+}
+
+/* Etiquetas */
+.atlas-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-soft);
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+/* Select */
+.atlas-select {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  background: white;
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.atlas-select:hover {
+  border-color: var(--color-primary-light);
+}
+.atlas-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Botones */
+.atlas-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 8px 0 8px;
+}
+.atlas-btn {
+  border: none;
+  border-radius: 40px;
+  padding: 10px 16px;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.atlas-btn:hover {
+  transform: translateY(-1px);
+  background: var(--color-primary-light);
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.25);
+}
+.atlas-btn:active {
+  transform: translateY(1px);
+}
+.atlas-btn-secondary {
+  background: #e2e8f0;
+  color: var(--color-text-soft);
+}
+.atlas-btn-secondary:hover {
+  background: #cbd5e1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.atlas-btn-active {
+  background: var(--color-danger);
+}
+.atlas-btn-active:hover {
+  background: #dc2626;
+}
+
+/* Botón de manos con icono SVG */
+.atlas-btn-hands {
+  grid-column: 1 / -1;
+  background: var(--color-success);
+}
+.atlas-btn-hands::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0v3' /%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+.atlas-btn-hands.atlas-btn-active::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12' /%3E%3C/svg%3E");
+}
+
+/* Status messages */
+.atlas-status {
+  margin-top: 20px;
+  background: #f1f5f9;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-soft);
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.atlas-status::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' /%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+.atlas-status-error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+.atlas-status-error::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ef4444' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /%3E%3C/svg%3E");
+}
+
+/* Tarjetas informativas */
+.atlas-card {
+  margin-top: 20px;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.atlas-card > div,
+.atlas-card > p {
+  margin-top: 6px;
+}
+.atlas-card h3 {
+  margin: 0 0 12px 0;
+  color: var(--color-text-dark);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.atlas-card h3::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' /%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+.atlas-warning {
+  margin-top: 10px;
+  color: var(--color-warning);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.atlas-warning::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23f59e0b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.atlas-quiz-stem {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-soft);
+}
+
+.atlas-quiz-interaction {
+  margin-top: 10px;
+}
+
+.atlas-quiz-helper {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--color-primary-soft);
+  color: var(--color-text-soft);
+  font-size: 0.78rem;
+}
+
+.atlas-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.atlas-quiz-option-btn {
+  border-radius: 12px;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.atlas-quiz-open-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.atlas-quiz-open-row .atlas-select {
+  margin-bottom: 0;
+}
+
+.atlas-quiz-progress,
+.atlas-quiz-suggestions {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.76rem;
+}
+
+.atlas-quiz-progress {
+  background: #ecfeff;
+  color: #0f766e;
+  border: 1px solid #a5f3fc;
+}
+
+.atlas-quiz-suggestions {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+/* El quiz vuelve a ser parte del flujo normal del panel (sin modal invasivo). */
+#quizPanel.atlas-card {
+  position: relative;
+  inset: auto;
+  transform: none;
+  z-index: auto;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+  animation: none;
+}
+
+/* Mejoras quiz interaction */
+.atlas-quiz-interaction {
+  margin-top: 18px;
+  min-height: 48px;
+}
+.atlas-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.atlas-quiz-option-btn {
+  border-radius: 16px;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 0.92rem;
+  padding: 11px 14px;
+  background: var(--color-primary-soft);
+  color: var(--color-text-dark);
+  border: 1.5px solid var(--color-primary-light);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.atlas-quiz-option-btn:hover, .atlas-quiz-option-btn:focus {
+  background: var(--color-primary-light);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(59,130,246,0.10);
+  outline: none;
+}
+.atlas-quiz-stem {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #f1f5f9;
+  border: 1.5px solid var(--color-primary-soft);
+  color: var(--color-text-dark);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.atlas-quiz-helper {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--color-primary-light);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.atlas-quiz-open-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+/* --- Fin mejoras quiz --- */
+
+/* ==========================================================================
+   Webcam overlay – Minimal & elegant
+   ========================================================================== */
+#webcam-overlay {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--z-webcam);
+  width: 220px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.2s;
+}
+#webcam-overlay:hover {
+  transform: scale(1.02);
+}
+#webcam-video-wrapper {
+  position: relative;
+  line-height: 0;
+}
+#webcam-preview {
+  width: 100%;
+  display: block;
+  transform: scaleX(-1);
+}
+#hand-skeleton-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+#hand-status-bar {
+  color: #f1f5f9;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   Laser cursor – Suave y sin emojis
+   ========================================================================== */
+.hand-laser-cursor {
+  pointer-events: none;
+  z-index: 200;
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.5));
+  animation: gentlePulse 1s infinite alternate;
+}
+.hand-laser-cursor svg {
+  display: block;
+  width: 44px;
+  height: 44px;
+}
+.laser-ring {
+  transition: stroke-dashoffset 0.05s linear;
+  stroke: #ff4d4d;
+  stroke-width: 2;
+  fill: none;
+}
+@keyframes gentlePulse {
+  0% { opacity: 0.7; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1.04); }
+}
+
+/* ==========================================================================
+   Responsive (mobile friendly)
+   ========================================================================== */
+@media (max-width: 720px) {
+  body.atlas-panel-open .atlas-panel-toggle {
+    left: auto;
+    right: 12px;
+  }
+
+  .atlas-panel {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-height: 55vh;
+    padding: 18px;
+    border-radius: 20px;
+  }
+  #webcam-overlay {
+    bottom: 12px;
+    right: 12px;
+    width: 180px;
+  }
+  .atlas-panel-toggle {
+    top: 12px;
+    left: 12px;
+  }
+}
+
+/* ==========================================================================
+   Helper classes (original, sin cambios)
+   ========================================================================== */
+.hidden, [hidden] { display: none !important; }
+.visually-hidden {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+.invisible { visibility: hidden; }
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+}
+.clearfix::after { clear: both; }
+
+/* ==========================================================================
+   Media queries & Print styles (original)
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Espaciado extra si se desea */
+}
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
+  /* Estilos para alta resolución */
+}
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a, a:visited { text-decoration: underline; }
+  a[href]::after { content: " (" attr(href) ")"; }
+  abbr[title]::after { content: " (" attr(title) ")"; }
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after { content: ""; }
+  pre { white-space: pre-wrap !important; }
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  tr, img { page-break-inside: avoid; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}

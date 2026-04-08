@@ -1,0 +1,83 @@
+{
+  "circulatory": [
+	"heart",
+	"aorta",
+	"superior_vena_cava",
+	"inferior_vena_cava",
+	"femoral_artery",
+	"femoral_vein"
+  ],
+  "digestive": [
+	"mouth",
+	"salivary_glands",
+	"esophagus",
+	"stomach",
+	"liver",
+	"intestine_small",
+	"intestine_large",
+	"rectum"
+  ],
+  "lymphatic": [
+	"tonsils",
+	"cervical_lymph_nodes",
+	"thymus",
+	"axillary_lymph_nodes",
+	"spleen",
+	"inguinal_lymph_nodes",
+	"popliteal_lymph_nodes"
+  ],
+  "male-reproductive": [
+	"testicle",
+	"epididymis",
+	"vas_deferens",
+	"seminal_vesicle",
+	"prostate",
+	"penis"
+  ],
+  "muscular": [
+	"trapezius",
+	"deltoid",
+	"pectoralis",
+	"biceps",
+	"triceps",
+	"oblique",
+	"quadriceps",
+	"hamstrings"
+  ],
+  "nervous": [
+	"brain",
+	"spinal_cord",
+	"intercostal_nerves",
+	"median_nerve",
+	"femoral_nerve",
+	"sciatic_nerve",
+	"tibial_nerve"
+  ],
+  "respiratory": [
+	"nasal_cavity",
+	"oral_cavity",
+	"larynx",
+	"trachea",
+	"lungs",
+	"diaphragm"
+  ],
+  "skeletal": [
+	"skull",
+	"spine",
+	"rib_cage",
+	"humerus",
+	"radius",
+	"ulna",
+	"pelvis",
+	"femur",
+	"tibia",
+	"fibula"
+  ],
+  "urinary": [
+	"kidney",
+	"ureter",
+	"bladder",
+	"urethra"
+  ]
+}
+

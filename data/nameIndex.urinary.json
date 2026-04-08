@@ -1,0 +1,46 @@
+{
+  "__comment": "Mapeo opcional: NOMBRE_EXACTO_DEL_GLB -> conceptId. Completa esto con los obj.name reales.",
+  "Kidney": "kidney",
+  "kidney": "kidney",
+  "LeftKidney": "kidney",
+  "RightKidney": "kidney",
+
+  "Left_Kidney": "kidney",
+  "Right_Kidney": "kidney",
+  "Kidney_L": "kidney",
+  "Kidney_R": "kidney",
+  "L_Kidney": "kidney",
+  "R_Kidney": "kidney",
+  "kidney_left": "kidney",
+  "kidney_right": "kidney",
+
+  "Rinon": "kidney",
+  "Rinon_Izquierdo": "kidney",
+  "Rinon_Derecho": "kidney",
+  "Riñón": "kidney",
+  "Riñón_Izquierdo": "kidney",
+  "Riñón_Derecho": "kidney",
+
+  "Ureter": "ureter",
+  "ureter": "ureter",
+  "LeftUreter": "ureter",
+  "RightUreter": "ureter",
+  "Ureter_L": "ureter",
+  "Ureter_R": "ureter",
+  "UreterLeft": "ureter",
+  "UreterRight": "ureter",
+  "Ureter_Izquierdo": "ureter",
+  "Ureter_Derecho": "ureter",
+
+  "Bladder": "bladder",
+  "bladder": "bladder",
+  "UrinaryBladder": "bladder",
+  "Vejiga": "bladder",
+  "Vejiga_Urinaria": "bladder",
+
+  "Urethra": "urethra",
+  "urethra": "urethra",
+  "Uretra": "urethra"
+}
+
+

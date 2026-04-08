@@ -1,0 +1,393 @@
+{
+  "__notes": "Coordenadas en espacio world de Three.js. Modelo ~1.7m, pies en y~0. X negativo = lado izquierdo del modelo (derecha del espectador). Ajusta 'position' y 'radius' manualmente despues de cargar cada sistema y confirmar visualmente con el toggle debug 'Hotspots'.",
+  "circulatory": [
+    {
+      "conceptId": "heart",
+      "label": "Heart",
+      "position": [-0.02, 1.36, 0.035],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "aorta",
+      "label": "Aorta",
+      "position": [-0.01, 1.28, 0.065],
+      "radius": 0.03
+    },
+    {
+      "conceptId": "superior_vena_cava",
+      "label": "Superior Vena Cava",
+      "position": [0, 1.43, 0.035],
+      "radius": 0.03
+    },
+    {
+      "conceptId": "inferior_vena_cava",
+      "label": "Inferior Vena Cava",
+      "position": [0.01, 1.22, 0.035],
+      "radius": 0.038
+    },
+    {
+      "conceptId": "femoral_artery",
+      "label": "Femoral Artery",
+      "position": [-0.08, 0.88, 0],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "femoral_vein",
+      "label": "Femoral Vein",
+      "position": [0.08, 0.82, 0],
+      "radius": 0.05
+    }
+  ],
+  "digestive": [
+    {
+      "conceptId": "mouth",
+      "label": "Mouth",
+      "position": [0, 1.6, 0.02],
+      "radius": 0.04
+    },
+    {
+      "conceptId": "salivary_glands",
+      "label": "Salivary Glands",
+      "position": [0.06, 1.62, -0.04],
+      "radius": 0.03
+    },
+    {
+      "conceptId": "esophagus",
+      "label": "Esophagus",
+      "position": [0, 1.48, -0.03],
+      "radius": 0.04
+    },
+    {
+      "conceptId": "liver",
+      "label": "Liver",
+      "position": [-0.08, 1.26, -0.02],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "stomach",
+      "label": "Stomach",
+      "position": [0.07, 1.21, -0.02],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "intestine_small",
+      "label": "Small Intestine",
+      "position": [0, 1.06, -0.01],
+      "radius": 0.08
+    },
+    {
+      "conceptId": "intestine_large",
+      "label": "Large Intestine",
+      "position": [0.09, 1.06, -0.01],
+      "radius": 0.04
+    },
+    {
+      "conceptId": "rectum",
+      "label": "Rectum",
+      "position": [0, 0.89, -0.04],
+      "radius": 0.05
+    }
+  ],
+  "lymphatic": [
+    {
+      "conceptId": "tonsils",
+      "label": "Tonsils",
+      "position": [0.03, 1.6, 0],
+      "radius": 0.03
+    },
+    {
+      "conceptId": "cervical_lymph_nodes",
+      "label": "Cervical Lymph Nodes",
+      "position": [-0.06, 1.6, -0.06],
+      "radius": 0.02
+    },
+    {
+      "conceptId": "thymus",
+      "label": "Thymus",
+      "position": [0, 1.4, -0.02],
+      "radius": 0.04
+    },
+    {
+      "conceptId": "axillary_lymph_nodes",
+      "label": "Axillary Lymph Nodes",
+      "position": [0.14, 1.38, -0.05],
+      "radius": 0.05
+    },
+    {
+      "conceptId": "spleen",
+      "label": "Spleen",
+      "position": [0.11, 1.21, -0.07],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "inguinal_lymph_nodes",
+      "label": "Inguinal Lymph Nodes",
+      "position": [0.05, 0.89, 0.01],
+      "radius": 0.05
+    },
+    {
+      "conceptId": "popliteal_lymph_nodes",
+      "label": "Popliteal Lymph Nodes",
+      "position": [0.08, 0.51, -0.1],
+      "radius": 0.04
+    }
+  ],
+  "male-reproductive": [
+    {
+      "conceptId": "penis",
+      "label": "Penis",
+      "position": [0.005, 0.414, 0.024],
+      "radius": 0.024
+    },
+    {
+      "conceptId": "testicle",
+      "label": "Testicle",
+      "position": [0.018, 0.366, -0.005],
+      "radius": 0.028
+    },
+    {
+      "conceptId": "epididymis",
+      "label": "Epididymis",
+      "position": [-0.015, 0.39, -0.012],
+      "radius": 0.02
+    },
+    {
+      "conceptId": "prostate",
+      "label": "Prostate",
+      "position": [0.005, 0.438, -0.056],
+      "radius": 0.02
+    },
+    {
+      "conceptId": "seminal_vesicle",
+      "label": "Seminal Vesicle",
+      "position": [0.005, 0.487, -0.075],
+      "radius": 0.03
+    },
+    {
+      "conceptId": "vas_deferens",
+      "label": "Vas Deferens",
+      "position": [-0.066, 0.511, -0.012],
+      "radius": 0.021
+    }
+  ],
+  "muscular": [
+    {
+      "conceptId": "trapezius",
+      "label": "Trapezius",
+      "position": [0.057, 1.52, -0.088],
+      "radius": 0.07
+    },
+    {
+      "conceptId": "deltoid",
+      "label": "Deltoid",
+      "position": [-0.18, 1.408, -0.082],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "pectoralis",
+      "label": "Pectoralis",
+      "position": [0.057, 1.359, 0.011],
+      "radius": 0.07
+    },
+    {
+      "conceptId": "biceps",
+      "label": "Biceps",
+      "position": [-0.245, 1.262, -0.095],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "triceps",
+      "label": "Triceps",
+      "position": [0.21, 1.28, -0.088],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "oblique",
+      "label": "Oblique",
+      "position": [0.1, 1.069, 0.01],
+      "radius": 0.07
+    },
+    {
+      "conceptId": "hamstrings",
+      "label": "Hamstrings",
+      "position": [-0.13, 0.681, -0.082],
+      "radius": 0.078
+    },
+    {
+      "conceptId": "quadriceps",
+      "label": "Quadriceps",
+      "position": [0.09, 0.56, -0.031],
+      "radius": 0.07
+    }
+  ],
+  "nervous": [
+    {
+      "conceptId": "brain",
+      "label": "Brain",
+      "position": [0, 1.699, -0.075],
+      "radius": 0.09
+    },
+    {
+      "conceptId": "spinal_cord",
+      "label": "Spinal Cord",
+      "position": [0, 1.529, -0.06],
+      "radius": 0.064
+    },
+    {
+      "conceptId": "intercostal_nerves",
+      "label": "Intercostal Nerves",
+      "position": [-0.1, 1.359, -0.02],
+      "radius": 0.039
+    },
+    {
+      "conceptId": "sciatic_nerve",
+      "label": "Sciatic Nerve",
+      "position": [-0.07, 0.899, -0.114],
+      "radius": 0.07
+    },
+    {
+      "conceptId": "median_nerve",
+      "label": "Median Nerve",
+      "position": [0.248, 1.166, -0.095],
+      "radius": 0.049
+    },
+    {
+      "conceptId": "femoral_nerve",
+      "label": "Femoral Nerve",
+      "position": [0.08, 0.923, -0.018],
+      "radius": 0.035
+    },
+    {
+      "conceptId": "tibial_nerve",
+      "label": "Tibial Nerve",
+      "position": [0.07, 0.366, -0.107],
+      "radius": 0.05
+    }
+  ],
+  "respiratory": [
+    {
+      "conceptId": "nasal_cavity",
+      "label": "Nasal Cavity",
+      "position": [-0.01, 1.651, 0.03],
+      "radius": 0.024
+    },
+    {
+      "conceptId": "oral_cavity",
+      "label": "Oral Cavity",
+      "position": [0, 1.595, 0.04],
+      "radius": 0.035
+    },
+    {
+      "conceptId": "larynx",
+      "label": "Larynx",
+      "position": [0, 1.535, -0.031],
+      "radius": 0.04
+    },
+    {
+      "conceptId": "trachea",
+      "label": "Trachea",
+      "position": [0, 1.457, -0.043],
+      "radius": 0.04
+    },
+    {
+      "conceptId": "lungs",
+      "label": "Lung",
+      "position": [-0.079, 1.359, -0.02],
+      "radius": 0.092
+    },
+    {
+      "conceptId": "diaphragm",
+      "label": "Diaphragm",
+      "position": [0.107, 1.214, -0.01],
+      "radius": 0.06
+    }
+  ],
+  "skeletal": [
+    {
+      "conceptId": "skull",
+      "label": "Skull",
+      "position": [0, 1.652, 0],
+      "radius": 0.1
+    },
+    {
+      "conceptId": "spine",
+      "label": "Spine",
+      "position": [0, 1.529, -0.069],
+      "radius": 0.049
+    },
+    {
+      "conceptId": "rib_cage",
+      "label": "Rib Cage",
+      "position": [0, 1.311, -0.056],
+      "radius": 0.171
+    },
+    {
+      "conceptId": "humerus",
+      "label": "Humerus",
+      "position": [-0.22, 1.287, -0.075],
+      "radius": 0.07
+    },
+    {
+      "conceptId": "radius",
+      "label": "Radius",
+      "position": [-0.27, 1.1, -0.107],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "ulna",
+      "label": "Ulna",
+      "position": [-0.296, 0.923, -0.043],
+      "radius": 0.06
+    },
+    {
+      "conceptId": "pelvis",
+      "label": "Pelvis",
+      "position": [0, 0.972, -0.01],
+      "radius": 0.146
+    },
+    {
+      "conceptId": "femur",
+      "label": "Femur",
+      "position": [-0.09, 0.57, -0.063],
+      "radius": 0.09
+    },
+    {
+      "conceptId": "fibula",
+      "label": "Fibula",
+      "position": [-0.09, 0.341, -0.05],
+      "radius": 0.07
+    },
+    {
+      "conceptId": "tibia",
+      "label": "Tibia",
+      "position": [-0.07, 0.172, -0.075],
+      "radius": 0.085
+    }
+  ],
+  "urinary": [
+    {
+      "conceptId": "kidney",
+      "label": "Kidney",
+      "position": [-0.053, 1.166, -0.06],
+      "radius": 0.057
+    },
+    {
+      "conceptId": "ureter",
+      "label": "Ureter",
+      "position": [-0.053, 1.044, -0.04],
+      "radius": 0.046
+    },
+    {
+      "conceptId": "bladder",
+      "label": "Bladder",
+      "position": [0, 0.899, -0.063],
+      "radius": 0.046
+    },
+    {
+      "conceptId": "urethra",
+      "label": "Urethra",
+      "position": [0, 0.778, -0.01],
+      "radius": 0.032
+    }
+  ]
+}

@@ -19,7 +19,7 @@ export function createUIPanel(systems) {
       </div>
 
       <div class="atlas-topbar-modes" aria-label="Modos">
-        <span class="atlas-mode-tab atlas-mode-tab-active">Explorar</span>
+        <span id="exploreModeTab" class="atlas-mode-tab atlas-mode-tab-active">Explorar</span>
         <button id="openGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Aprendizaje Guiado</button>
         <button id="toggleQuizBtn" type="button" class="atlas-btn atlas-btn-secondary"><span class="icon-exam" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
@@ -117,7 +117,7 @@ export function createUIPanel(systems) {
         <div><strong>Función:</strong> <span id="guidedFunc">-</span></div>
       </div>
       <div class="atlas-actions" style="margin-top: 8px;">
-        <button id="toggleGuidedInsideBtn" type="button" class="atlas-btn atlas-btn-secondary">Pausar/Salir</button>
+        <button id="toggleGuidedInsideBtn" type="button" class="atlas-btn atlas-btn-secondary">Pausar</button>
         <button id="prevGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Anterior</button>
         <button id="nextGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Siguiente</button>
         <button id="stopGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Salir</button>
@@ -375,6 +375,18 @@ export function createUIPanel(systems) {
     suggestionsEl.textContent = `Refuerzo sugerido: ${formatted}`;
   }
 
+  let guidedModeActive = false;
+  let quizModeActive = false;
+
+  function syncTopbarModeState() {
+    const exploreTab = container.querySelector("#exploreModeTab");
+    if (!exploreTab) return;
+    exploreTab.classList.toggle(
+      "atlas-mode-tab-active",
+      !guidedModeActive && !quizModeActive,
+    );
+  }
+
   function setQuizState({ active, prompt, score, total, currentExercise, progress }) {
     const promptEl = container.querySelector("#quizPrompt");
     const scoreEl = container.querySelector("#quizScore");
@@ -396,12 +408,16 @@ export function createUIPanel(systems) {
     renderReinforcement(progress);
 
     if (toggleBtn) {
+      quizModeActive = Boolean(active);
       toggleBtn.classList.toggle("atlas-btn-active", Boolean(active));
+      toggleBtn.setAttribute("aria-pressed", active ? "true" : "false");
       // Reemplazar el contenido por SVG + texto
       toggleBtn.innerHTML = `<span class="icon-exam" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
       </span>${active ? "Examen activo" : "Modo Examen"}`;
     }
+
+    syncTopbarModeState();
   }
 
   function showQuizFeedback({ ok, message, explanation, progress }) {
@@ -588,6 +604,18 @@ export function createUIPanel(systems) {
   const guidedPanel = container.querySelector("#guidedPanel");
 
   function setGuidedState(part) {
+    guidedModeActive = Boolean(part);
+    const guidedTopbarBtn = container.querySelector("#openGuidedBtn");
+    if (guidedTopbarBtn) {
+      guidedTopbarBtn.classList.toggle("atlas-btn-active", guidedModeActive);
+      guidedTopbarBtn.setAttribute("aria-pressed", guidedModeActive ? "true" : "false");
+      guidedTopbarBtn.textContent = guidedModeActive
+        ? "Guiado activo"
+        : "Aprendizaje Guiado";
+    }
+
+    syncTopbarModeState();
+
     guidedPanel.style.display = part ? "block" : "none";
     const stepEl = guidedPanel.querySelector("#guidedStep");
     const totalEl = guidedPanel.querySelector("#guidedTotal");

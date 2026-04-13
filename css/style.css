@@ -509,10 +509,13 @@ body {
   background: rgba(203, 213, 225, 0.9);
 }
 .atlas-btn-active {
-  background: var(--color-danger);
+  background: #dbeafe !important;
+  color: #1d4ed8 !important;
+  border: 1px solid #bfdbfe !important;
+  box-shadow: 0 1px 4px rgba(59, 130, 246, 0.12);
 }
 .atlas-btn-active:hover {
-  background: #dc2626;
+  background: #cfe3fd !important;
 }
 
 /* Botón de manos con icono SVG */

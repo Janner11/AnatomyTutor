@@ -7,89 +7,104 @@ export function createUIPanel(systems) {
   const container = document.createElement("aside");
   container.className = "atlas-panel";
   container.innerHTML = `
-    <h2 class="atlas-title">Anatomy Tutor 3D</h2>
-    <p class="atlas-subtitle">Seleccion anatomica precisa por raycasting</p>
+    <header class="atlas-topbar">
+      <div class="atlas-topbar-brand">
+        <h2 class="atlas-title">Anatomy Tutor 3D</h2>
+        <p class="atlas-subtitle">Seleccion anatomica precisa por raycasting</p>
+      </div>
 
-    <label class="atlas-label" for="systemSelect">Sistema corporal</label>
-    <select id="systemSelect" class="atlas-select"></select>
+      <div class="atlas-topbar-system">
+        <label class="atlas-label" for="systemSelect">Sistema corporal</label>
+        <select id="systemSelect" class="atlas-select"></select>
+      </div>
 
-    <div class="atlas-actions">
-      <button id="toggleLabelsBtn" type="button" class="atlas-btn">Mostrar etiquetas</button>
-      <button id="toggleHitboxesBtn" type="button" class="atlas-btn atlas-btn-secondary">Hotspots debug</button>
-      <button id="clearSelectionBtn" type="button" class="atlas-btn atlas-btn-secondary">Limpiar seleccion</button>
-      <button id="toggleHandsBtn" type="button" class="atlas-btn atlas-btn-secondary atlas-btn-hands">Manos</button>
-      <button id="openGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Aprendizaje Guiado</button>
+      <div class="atlas-topbar-modes" aria-label="Modos">
+        <span class="atlas-mode-tab atlas-mode-tab-active">Explorar</span>
+        <button id="openGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Aprendizaje Guiado</button>
+        <button id="toggleQuizBtn" type="button" class="atlas-btn atlas-btn-secondary">📝 Modo Examen</button>
+      </div>
+    </header>
+
+    <div class="atlas-layout">
+      <nav class="atlas-left-rail" aria-label="Navegacion principal">
+        <button id="toggleLabelsBtn" type="button" class="atlas-btn">Mostrar etiquetas</button>
+        <button id="toggleHitboxesBtn" type="button" class="atlas-btn atlas-btn-secondary">Hotspots debug</button>
+        <button id="clearSelectionBtn" type="button" class="atlas-btn atlas-btn-secondary">Limpiar seleccion</button>
+        <button id="toggleHandsBtn" type="button" class="atlas-btn atlas-btn-secondary atlas-btn-hands">Manos</button>
+        <div id="statusBox" class="atlas-status">Cargando...</div>
+      </nav>
+
+      <main class="atlas-main-canvas" aria-label="Espacio principal 3D"></main>
+
+      <aside class="atlas-right-context" aria-label="Panel de detalle y acciones">
+        <section class="atlas-card" id="quizPanel">
+          <h3>Modo Examen</h3>
+          <div class="atlas-actions" style="margin-top: 8px;">
+            <button id="nextQuizBtn" type="button" class="atlas-btn atlas-btn-secondary">Siguiente</button>
+          </div>
+          <div style="margin-top: 10px; line-height: 1.25;">
+            <div><strong>Pregunta:</strong> <span id="quizPrompt">-</span></div>
+            <div><strong>Tipo:</strong> <span id="quizMeta">-</span></div>
+            <div id="quizStem" class="atlas-quiz-stem" style="display:none;"></div>
+            <div id="quizInteraction" class="atlas-quiz-interaction" style="display:none;"></div>
+            <div><strong>Puntaje:</strong> <span id="quizScore">0 / 0</span></div>
+            <div id="quizProgress" class="atlas-quiz-progress" style="display:none;"></div>
+            <div id="quizSuggestions" class="atlas-quiz-suggestions" style="display:none;"></div>
+            <div id="quizFeedback" class="atlas-status" style="margin-top: 8px; display:none;"></div>
+          </div>
+        </section>
+
+        <section class="atlas-card" id="editorPanel" style="display: none;">
+          <h3>Editor de Hotspot</h3>
+          <div>
+            <label class="atlas-label">X: <span id="sliderValueX">0.000</span></label>
+            <input type="range" id="sliderX" min="-0.5" max="0.5" step="0.001" value="0">
+          </div>
+          <div>
+            <label class="atlas-label">Y: <span id="sliderValueY">1.000</span></label>
+            <input type="range" id="sliderY" min="0.1" max="2" step="0.001" value="1">
+          </div>
+          <div>
+            <label class="atlas-label">Z: <span id="sliderValueZ">0.000</span></label>
+            <input type="range" id="sliderZ" min="-0.3" max="0.2" step="0.001" value="0">
+          </div>
+          <div>
+            <label class="atlas-label">Radio: <span id="sliderValueRadius">0.050</span></label>
+            <input type="range" id="sliderRadius" min="0.02" max="0.3" step="0.001" value="0.05">
+          </div>
+          <button id="downloadJsonBtn" type="button" class="atlas-btn">Descargar clickTargets.json</button>
+        </section>
+
+        <section class="atlas-card">
+          <h3>Identificacion anatomica</h3>
+          <div><strong>Nombre anatomico:</strong> <span data-field="anatomicalName">-</span></div>
+          <div><strong>Anatomy ID:</strong> <span data-field="anatomyId">-</span></div>
+          <div><strong>Categoria:</strong> <span data-field="category">-</span></div>
+          <div><strong>Sistema:</strong> <span data-field="system">-</span></div>
+          <div><strong>Descripcion:</strong> <span data-field="description">-</span></div>
+          <div><strong>Confianza:</strong> <span data-field="confidence">-</span></div>
+          <div><strong>Origen del dato:</strong> <span data-field="sourceType">-</span></div>
+          <div><strong>Fuente:</strong> <span data-field="dataSource">-</span></div>
+        </section>
+
+        <section class="atlas-card">
+          <h3>Datos espaciales del mesh (GLB real)</h3>
+          <div><strong>Mesh nombre:</strong> <span data-field="meshName">-</span></div>
+          <div><strong>Jerarquia:</strong> <span data-field="hierarchy">-</span></div>
+          <div><strong>Centroide world:</strong> <span data-field="centroidWorld">-</span></div>
+          <div><strong>BSphere world:</strong> <span data-field="bsphere">-</span></div>
+          <div><strong>Point world (click):</strong> <span data-field="pointWorld">-</span></div>
+          <div><strong>Point local:</strong> <span data-field="pointLocal">-</span></div>
+          <div><strong>Normal world:</strong> <span data-field="normalWorld">-</span></div>
+          <div><strong>UV:</strong> <span data-field="uv">-</span></div>
+          <div><strong>Face index:</strong> <span data-field="faceIndex">-</span></div>
+          <div><strong>Distancia:</strong> <span data-field="distance">-</span></div>
+          <div class="atlas-warning" data-field="warning"></div>
+        </section>
+      </aside>
     </div>
 
-    <div id="statusBox" class="atlas-status">Cargando...</div>
-
-    <section class="atlas-card" id="quizPanel">
-      <h3>Modo Examen</h3>
-      <div class="atlas-actions" style="margin-top: 8px;">
-        <button id="toggleQuizBtn" type="button" class="atlas-btn atlas-btn-secondary">📝 Modo Examen</button>
-        <button id="nextQuizBtn" type="button" class="atlas-btn atlas-btn-secondary">Siguiente</button>
-      </div>
-      <div style="margin-top: 10px; line-height: 1.25;">
-        <div><strong>Pregunta:</strong> <span id="quizPrompt">-</span></div>
-        <div><strong>Tipo:</strong> <span id="quizMeta">-</span></div>
-        <div id="quizStem" class="atlas-quiz-stem" style="display:none;"></div>
-        <div id="quizInteraction" class="atlas-quiz-interaction" style="display:none;"></div>
-        <div><strong>Puntaje:</strong> <span id="quizScore">0 / 0</span></div>
-        <div id="quizProgress" class="atlas-quiz-progress" style="display:none;"></div>
-        <div id="quizSuggestions" class="atlas-quiz-suggestions" style="display:none;"></div>
-        <div id="quizFeedback" class="atlas-status" style="margin-top: 8px; display:none;"></div>
-      </div>
-    </section>
-
-    <section class="atlas-card" id="editorPanel" style="display: none;">
-      <h3>Editor de Hotspot</h3>
-      <div>
-        <label class="atlas-label">X: <span id="sliderValueX">0.000</span></label>
-        <input type="range" id="sliderX" min="-0.5" max="0.5" step="0.001" value="0">
-      </div>
-      <div>
-        <label class="atlas-label">Y: <span id="sliderValueY">1.000</span></label>
-        <input type="range" id="sliderY" min="0.1" max="2" step="0.001" value="1">
-      </div>
-      <div>
-        <label class="atlas-label">Z: <span id="sliderValueZ">0.000</span></label>
-        <input type="range" id="sliderZ" min="-0.3" max="0.2" step="0.001" value="0">
-      </div>
-      <div>
-        <label class="atlas-label">Radio: <span id="sliderValueRadius">0.050</span></label>
-        <input type="range" id="sliderRadius" min="0.02" max="0.3" step="0.001" value="0.05">
-      </div>
-      <button id="downloadJsonBtn" type="button" class="atlas-btn">Descargar clickTargets.json</button>
-    </section>
-
-    <section class="atlas-card">
-      <h3>Identificacion anatomica</h3>
-      <div><strong>Nombre anatomico:</strong> <span data-field="anatomicalName">-</span></div>
-      <div><strong>Anatomy ID:</strong> <span data-field="anatomyId">-</span></div>
-      <div><strong>Categoria:</strong> <span data-field="category">-</span></div>
-      <div><strong>Sistema:</strong> <span data-field="system">-</span></div>
-      <div><strong>Descripcion:</strong> <span data-field="description">-</span></div>
-      <div><strong>Confianza:</strong> <span data-field="confidence">-</span></div>
-      <div><strong>Origen del dato:</strong> <span data-field="sourceType">-</span></div>
-      <div><strong>Fuente:</strong> <span data-field="dataSource">-</span></div>
-    </section>
-
-    <section class="atlas-card">
-      <h3>Datos espaciales del mesh (GLB real)</h3>
-      <div><strong>Mesh nombre:</strong> <span data-field="meshName">-</span></div>
-      <div><strong>Jerarquia:</strong> <span data-field="hierarchy">-</span></div>
-      <div><strong>Centroide world:</strong> <span data-field="centroidWorld">-</span></div>
-      <div><strong>BSphere world:</strong> <span data-field="bsphere">-</span></div>
-      <div><strong>Point world (click):</strong> <span data-field="pointWorld">-</span></div>
-      <div><strong>Point local:</strong> <span data-field="pointLocal">-</span></div>
-      <div><strong>Normal world:</strong> <span data-field="normalWorld">-</span></div>
-      <div><strong>UV:</strong> <span data-field="uv">-</span></div>
-      <div><strong>Face index:</strong> <span data-field="faceIndex">-</span></div>
-      <div><strong>Distancia:</strong> <span data-field="distance">-</span></div>
-      <div class="atlas-warning" data-field="warning"></div>
-    </section>
-
-    <section class="atlas-card" id="guidedPanel" style="display: none;">
+    <section class="atlas-card atlas-bottom-tray" id="guidedPanel" style="display: none;">
       <h3>Aprendizaje Guiado</h3>
       <div id="guidedContent">
         <div><strong>Paso:</strong> <span id="guidedStep">-</span> / <span id="guidedTotal">-</span></div>

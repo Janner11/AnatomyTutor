@@ -119,23 +119,14 @@ body {
    ========================================================================== */
 .atlas-panel {
   position: fixed;
-  top: 24px;
-  left: 24px;
+  inset: 0;
   z-index: var(--z-panel);
-  width: min(340px, calc(100vw - 48px));
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
-  background: var(--color-panel);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0, 0, 0, 0.02);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  background: transparent;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 
 .atlas-panel-hidden {
-  transform: translateX(-400px);
   opacity: 0;
   pointer-events: none;
 }
@@ -177,7 +168,7 @@ body {
 
 /* El boton usa una clase en body para evitar dependencias fragiles de orden DOM */
 body.atlas-panel-open .atlas-panel-toggle {
-  left: calc(24px + min(340px, calc(100vw - 48px)) + 12px);
+  left: 308px;
 }
 
 
@@ -191,6 +182,122 @@ body.atlas-panel-open .atlas-panel-toggle {
 .atlas-panel::-webkit-scrollbar-thumb {
   background: var(--color-border);
   border-radius: 10px;
+}
+
+.atlas-topbar {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  z-index: calc(var(--z-panel) + 1);
+  display: grid;
+  grid-template-columns: minmax(220px, 1.3fr) minmax(180px, 1fr) minmax(250px, 1.2fr);
+  align-items: end;
+  gap: 14px;
+  pointer-events: auto;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: var(--color-panel);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+}
+
+.atlas-topbar-system .atlas-select {
+  margin-bottom: 0;
+}
+
+.atlas-topbar-modes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.atlas-mode-tab {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-soft);
+  background: #f8fafc;
+}
+
+.atlas-mode-tab-active {
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.atlas-layout {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.atlas-left-rail {
+  position: absolute;
+  top: 132px;
+  left: 24px;
+  width: min(240px, calc(100vw - 48px));
+  max-height: calc(100vh - 168px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: auto;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: var(--color-panel);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+}
+
+.atlas-left-rail .atlas-btn {
+  width: 100%;
+}
+
+.atlas-left-rail .atlas-status {
+  margin-top: 2px;
+}
+
+.atlas-main-canvas {
+  display: none;
+}
+
+.atlas-right-context {
+  position: absolute;
+  top: 132px;
+  right: 24px;
+  width: min(380px, calc(100vw - 48px));
+  max-height: calc(100vh - 168px);
+  overflow-y: auto;
+  pointer-events: auto;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: var(--color-panel);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+}
+
+.atlas-right-context > .atlas-card:first-child {
+  margin-top: 0;
+}
+
+.atlas-bottom-tray {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  width: min(900px, calc(100vw - 340px));
+  max-height: 220px;
+  overflow-y: auto;
+  margin-top: 0;
+  pointer-events: auto;
 }
 
 /* Títulos */
@@ -214,7 +321,7 @@ body.atlas-panel-open .atlas-panel-toggle {
 }
 
 .atlas-subtitle {
-  margin: 0 0 24px 0;
+  margin: 0;
   color: var(--color-text-muted);
   font-size: 0.85rem;
   font-weight: 400;
@@ -611,14 +718,58 @@ body.atlas-panel-open .atlas-panel-toggle {
   }
 
   .atlas-panel {
+    inset: 0;
+  }
+
+  .atlas-topbar {
     top: 12px;
     left: 12px;
     right: 12px;
-    width: auto;
-    max-height: 55vh;
-    padding: 18px;
-    border-radius: 20px;
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding: 12px;
   }
+
+  .atlas-topbar-modes {
+    justify-content: flex-start;
+  }
+
+  .atlas-layout {
+    position: static;
+  }
+
+  .atlas-left-rail {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    max-height: 170px;
+  }
+
+  .atlas-right-context {
+    top: 204px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-height: calc(100vh - 400px);
+    padding: 12px;
+  }
+
+  .atlas-bottom-tray {
+    left: 12px;
+    right: 12px;
+    bottom: 192px;
+    transform: none;
+    width: auto;
+    max-height: 180px;
+  }
+
+  body.atlas-panel-open .atlas-panel-toggle {
+    left: auto;
+    right: 12px;
+  }
+
   #webcam-overlay {
     bottom: 12px;
     right: 12px;

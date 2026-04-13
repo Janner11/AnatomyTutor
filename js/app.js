@@ -44,6 +44,94 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 controls.target.set(0, 1, 0);
 
+// Órbita con flechas (manejado en animate): estable y coherente con el botón del ratón.
+const _orbitKeys = {
+  ArrowLeft: false,
+  ArrowRight: false,
+  ArrowUp: false,
+  ArrowDown: false,
+};
+const _kbOrbitSpherical = new THREE.Spherical();
+const _kbOrbitOffset = new THREE.Vector3();
+
+/** GSAP timeline mientras animamos zoom en aprendizaje guiado (null si inactivo). */
+let guidedCameraTween = null;
+
+function isKeyboardFocusElement(el) {
+  if (!el || !el.tagName) return false;
+  const t = el.tagName.toLowerCase();
+  if (t === "input" || t === "textarea" || t === "select") return true;
+  return el.isContentEditable === true;
+}
+
+window.addEventListener(
+  "keydown",
+  (e) => {
+    if (isKeyboardFocusElement(document.activeElement)) return;
+    if (
+      e.code === "ArrowLeft" ||
+      e.code === "ArrowRight" ||
+      e.code === "ArrowUp" ||
+      e.code === "ArrowDown"
+    ) {
+      e.preventDefault();
+      _orbitKeys[e.code] = true;
+    }
+  },
+  { passive: false },
+);
+
+window.addEventListener("keyup", (e) => {
+  if (e.code in _orbitKeys) _orbitKeys[e.code] = false;
+});
+
+function applyKeyboardOrbit(dt) {
+  if (!controls.enabled || handTrackingActive) return;
+
+  const left = _orbitKeys.ArrowLeft;
+  const right = _orbitKeys.ArrowRight;
+  const up = _orbitKeys.ArrowUp;
+  const down = _orbitKeys.ArrowDown;
+
+  if (guidedCameraTween?.isActive?.()) {
+    if (left || right || up || down) cancelGuidedCameraTween();
+    else return;
+  }
+
+  if (!left && !right && !up && !down) return;
+
+  const rotateSpeed = 2.2;
+  let dTheta = 0;
+  let dPhi = 0;
+  if (left) dTheta += rotateSpeed * dt;
+  if (right) dTheta -= rotateSpeed * dt;
+  if (up) dPhi -= rotateSpeed * dt;
+  if (down) dPhi += rotateSpeed * dt;
+
+  _kbOrbitOffset.copy(camera.position).sub(controls.target);
+  _kbOrbitSpherical.setFromVector3(_kbOrbitOffset);
+
+  _kbOrbitSpherical.theta += dTheta;
+  _kbOrbitSpherical.phi += dPhi;
+  _kbOrbitSpherical.phi = Math.max(
+    controls.minPolarAngle + 1e-5,
+    Math.min(controls.maxPolarAngle - 1e-5, _kbOrbitSpherical.phi),
+  );
+
+  _kbOrbitOffset.setFromSpherical(_kbOrbitSpherical);
+  camera.position.copy(controls.target).add(_kbOrbitOffset);
+}
+
+// Durante zoom guiado los controles se desactivan; rueda/clic cortan la animación y devuelven el control.
+(function setupGuidedViewInterrupt() {
+  const el = renderer.domElement;
+  const interrupt = () => {
+    if (guidedCameraTween?.isActive?.()) cancelGuidedCameraTween();
+  };
+  el.addEventListener("pointerdown", interrupt, true);
+  el.addEventListener("wheel", interrupt, { capture: true, passive: true });
+})();
+
 scene.add(new THREE.AmbientLight(0xffffff, 0.95));
 const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
 keyLight.position.set(5, 8, 6);
@@ -390,7 +478,101 @@ function findHotspotByConceptId(conceptId) {
   return null;
 }
 
+function cancelGuidedCameraTween() {
+  if (guidedCameraTween) {
+    guidedCameraTween.kill();
+    guidedCameraTween = null;
+  }
+  gsap.killTweensOf(camera.position);
+  gsap.killTweensOf(controls.target);
+  // Si se interrumpe el tween (cambio de paso, clic, rueda…), GSAP no ejecuta onComplete:
+  // hay que reactivar siempre los controles salvo modo manos.
+  if (!handTrackingActive) {
+    controls.enabled = true;
+    controls.enableRotate = true;
+    controls.enablePan = true;
+    controls.enableZoom = true;
+  }
+  controls.update();
+}
+
+/**
+ * Acerca la cámara de forma suave al concepto (mesh o hotspot).
+ */
+function slowZoomToAnatomyConcept(conceptId) {
+  if (!conceptId) return;
+
+  const hotspotMatch = findHotspotByConceptId(conceptId);
+  const mesh = findBestModelMeshByConceptId(conceptId);
+
+  const center = new THREE.Vector3();
+  let radius = 0.35;
+
+  if (mesh) {
+    const box = new THREE.Box3().setFromObject(mesh);
+    box.getCenter(center);
+    const size = box.getSize(new THREE.Vector3());
+    radius = Math.max(size.x, size.y, size.z, 0.02) * 0.55;
+  } else if (hotspotMatch) {
+    center.copy(hotspotMatch.hotspot.position);
+    const hr = Number(hotspotMatch.entry?.radius);
+    radius = Number.isFinite(hr) && hr > 0 ? hr * 5.5 : 0.22;
+  } else {
+    return;
+  }
+
+  const distance = Math.max(radius * 2.65, 1.15);
+
+  const dir = new THREE.Vector3().subVectors(camera.position, controls.target);
+  if (dir.lengthSq() < 1e-10) {
+    dir.set(0, 0.25 * radius, 1);
+  }
+  dir.normalize();
+  const endCam = center.clone().add(dir.multiplyScalar(distance));
+
+  cancelGuidedCameraTween();
+
+  const duration = 1.65;
+  // Durante el tween GSAP mueve la cámara; si OrbitControls sigue activo, update() la pisa.
+  if (!handTrackingActive) controls.enabled = false;
+
+  guidedCameraTween = gsap.timeline({
+    onComplete: () => {
+      guidedCameraTween = null;
+      if (!handTrackingActive) {
+        controls.enabled = true;
+        controls.update();
+      }
+    },
+  });
+
+  guidedCameraTween.to(
+    controls.target,
+    {
+      x: center.x,
+      y: center.y,
+      z: center.z,
+      duration,
+      ease: "power2.inOut",
+    },
+    0,
+  );
+  guidedCameraTween.to(
+    camera.position,
+    {
+      x: endCam.x,
+      y: endCam.y,
+      z: endCam.z,
+      duration,
+      ease: "power2.inOut",
+    },
+    0,
+  );
+}
+
 function focusGuidedConcept(conceptId) {
+  cancelGuidedCameraTween();
+
   if (!conceptId) {
     pickMarker.visible = false;
     clearZoneIndicator();
@@ -413,6 +595,9 @@ function focusGuidedConcept(conceptId) {
       clearZoneIndicator();
     }
     resetHighlight();
+    if (hotspotMatch) {
+      slowZoomToAnatomyConcept(conceptId);
+    }
     return;
   }
 
@@ -436,6 +621,8 @@ function focusGuidedConcept(conceptId) {
       }
     }
   }
+
+  slowZoomToAnatomyConcept(conceptId);
 }
 
 function clearZoneIndicator() {
@@ -496,6 +683,8 @@ async function handleCanvasPick(event) {
     const descriptiveInfo = resolver.getDescriptiveInfo(hitboxEntry.conceptId);
     ui.renderSelection(selection, null, descriptiveInfo, currentSystem.label);
     ui.setStatus(`Hotspot: ${hitboxEntry.label}.`);
+
+    tryGuidedLearningZoom(hitboxEntry);
 
     // Show editor panel if in debug mode
     if (hitboxesVisible) {
@@ -650,6 +839,7 @@ function applyHotspotHit(mesh, hitPoint) {
   ui.renderSelection(fakeSelection, null, descriptiveInfo, currentSystem.label);
   ui.hideEditor();
   ui.setStatus(`Mano: ${hitboxEntry.label}.`);
+  tryGuidedLearningZoom(hitboxEntry);
 }
 
 /** Returns a short human-readable gesture status string for the webcam overlay. */
@@ -844,6 +1034,14 @@ ui.prevGuidedBtn.addEventListener("click", () => guidedLearningManager.prev());
 ui.nextGuidedBtn.addEventListener("click", () => guidedLearningManager.next());
 ui.stopGuidedBtn.addEventListener("click", () => guidedLearningManager.stop());
 
+function tryGuidedLearningZoom(hitboxEntry) {
+  if (!hitboxEntry?.conceptId) return;
+  if (!guidedLearningManager.isActive()) return;
+  const part = guidedLearningManager.getCurrentPart();
+  if (!part || part.conceptId !== hitboxEntry.conceptId) return;
+  slowZoomToAnatomyConcept(hitboxEntry.conceptId);
+}
+
 // Reiniciar guided learning al cambiar de sistema
 ui.systemSelect.addEventListener("change", () => {
   guidedLearningManager.stop();
@@ -867,10 +1065,19 @@ const FINGER_TOUCH_ACTIVATE_NORM = 0.24;
 const FINGER_TOUCH_ACTIVATE_FRAMES = 3;
 const TWO_HANDS_GRACE_MS = 220;
 
+let _prevAnimTime = performance.now();
+
 function animate() {
   requestAnimationFrame(animate);
-  controls.update();
   const now = performance.now();
+  const dt = Math.min(0.12, (now - _prevAnimTime) / 1000);
+  _prevAnimTime = now;
+
+  if (!handTrackingActive) {
+    applyKeyboardOrbit(dt);
+  }
+
+  controls.update();
 
   if (handTrackingActive && handTracker) {
     const results = handTracker.detect();

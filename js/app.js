@@ -913,13 +913,13 @@ async function activateHandTracking() {
     controls.enabled = false;
 
     handTrackingActive = true;
-    ui.setHandsButtonState(true, "✋ Activo");
+    ui.setHandsButtonState(true, "Activo");
     ui.setStatus(
       "Hand tracking activo.  Izq: mano abierta = rotar modelo.  Der: pistola = l\u00e1ser.  Toca dedos de ambas manos para activar MODO ZOOM.",
     );
   } catch (err) {
     ui.setStatus(`Error al activar manos: ${err.message}`, true);
-    ui.setHandsButtonState(false, "✋ Manos");
+    ui.setHandsButtonState(false, "Manos");
     if (handTracker) {
       handTracker.destroy();
       handTracker = null;
@@ -950,7 +950,7 @@ function deactivateHandTracking() {
   renderer.domElement.addEventListener("pointerdown", mousePickHandler);
   controls.enabled = true;
 
-  ui.setHandsButtonState(false, "✋ Manos");
+  ui.setHandsButtonState(false, "Manos");
   ui.setStatus("Hand tracking desactivado. Modo mouse activo.");
 }
 

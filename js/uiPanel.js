@@ -21,7 +21,9 @@ export function createUIPanel(systems) {
       <div class="atlas-topbar-modes" aria-label="Modos">
         <span class="atlas-mode-tab atlas-mode-tab-active">Explorar</span>
         <button id="openGuidedBtn" type="button" class="atlas-btn atlas-btn-secondary">Aprendizaje Guiado</button>
-        <button id="toggleQuizBtn" type="button" class="atlas-btn atlas-btn-secondary">📝 Modo Examen</button>
+        <button id="toggleQuizBtn" type="button" class="atlas-btn atlas-btn-secondary"><span class="icon-exam" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        </span>Modo Examen</button>
       </div>
     </header>
 
@@ -30,7 +32,9 @@ export function createUIPanel(systems) {
         <button id="toggleLabelsBtn" type="button" class="atlas-btn">Mostrar etiquetas</button>
         <button id="toggleHitboxesBtn" type="button" class="atlas-btn atlas-btn-secondary">Hotspots debug</button>
         <button id="clearSelectionBtn" type="button" class="atlas-btn atlas-btn-secondary">Limpiar seleccion</button>
-        <button id="toggleHandsBtn" type="button" class="atlas-btn atlas-btn-secondary atlas-btn-hands">Manos</button>
+        <button id="toggleHandsBtn" type="button" class="atlas-btn atlas-btn-secondary atlas-btn-hands"><span style="display:inline-flex;align-items:center;gap:2px;"><span class="icon-hands" aria-hidden="true" style="display:inline-block;vertical-align:middle;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0v3"/></svg>
+        </span><span>Manos</span></span></button>
         <div id="statusBox" class="atlas-status">Cargando...</div>
       </nav>
 
@@ -214,7 +218,10 @@ export function createUIPanel(systems) {
 
   function setHandsButtonState(active, label) {
     const button = container.querySelector("#toggleHandsBtn");
-    button.textContent = label;
+    // Usar el mismo SVG siempre, solo cambia el texto
+    button.innerHTML = `<span style="display:inline-flex;align-items:center;gap:2px;"><span class="icon-hands" aria-hidden="true" style="display:inline-block;vertical-align:middle;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0v3"/></svg>
+    </span><span>${label}</span></span>`;
     button.classList.toggle("atlas-btn-active", active);
   }
 
@@ -390,7 +397,10 @@ export function createUIPanel(systems) {
 
     if (toggleBtn) {
       toggleBtn.classList.toggle("atlas-btn-active", Boolean(active));
-      toggleBtn.textContent = active ? "📝 Examen activo" : "📝 Modo Examen";
+      // Reemplazar el contenido por SVG + texto
+      toggleBtn.innerHTML = `<span class="icon-exam" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:6px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      </span>${active ? "Examen activo" : "Modo Examen"}`;
     }
   }
 

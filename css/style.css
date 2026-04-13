@@ -36,6 +36,14 @@
   --z-webcam: 30;
   --z-panel: 40;
   --z-toggle: 45;
+
+  /* === NUEVAS VARIABLES: SUPER TRANSPARENTE (LOW OPACITY, LOW BLUR) === */
+  --color-panel-glass: rgba(255, 255, 255, 0.2);   /* Muy transparente */
+  --color-panel-glass-strong: rgba(255, 255, 255, 0.35);
+  --glass-blur: blur(2px);   /* Blur mínimo para no distorsionar el modelo pero suavizar bordes */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  --glass-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
 html {
@@ -91,7 +99,7 @@ textarea {
 }
 
 /* ==========================================================================
-   Author's custom styles – Elegant, clean & friendly
+   Author's custom styles – Transparent Floating UI (Glass sin blur pesado)
    ========================================================================== */
 
 body {
@@ -115,7 +123,7 @@ body {
 }
 
 /* ==========================================================================
-   Main control panel – Clean glassmorphism
+   Main control panel – Transparente flotante
    ========================================================================== */
 .atlas-panel {
   position: fixed;
@@ -131,29 +139,30 @@ body {
   pointer-events: none;
 }
 
-/* Toggle Panel Button */
+/* Toggle Panel Button – estilo transparente */
 .atlas-panel-toggle {
   position: fixed;
-  top: 24px;
-  left: 24px;
   z-index: var(--z-toggle);
   width: 44px;
   height: 44px;
   border: none;
   border-radius: 12px;
-  background: var(--color-panel);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-primary);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease !important;
 }
 
 .atlas-panel-toggle:hover {
-  background: white;
+  background: rgba(255, 255, 255, 0.5) !important;
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
   color: var(--color-primary-light);
 }
 
@@ -166,10 +175,7 @@ body {
   height: 24px;
 }
 
-/* El boton usa una clase en body para evitar dependencias fragiles de orden DOM */
-body.atlas-panel-open .atlas-panel-toggle {
-  left: 308px;
-}
+/* La posicion del boton se calcula dinamicamente desde JS */
 
 
 /* Scroll personalizado (sutil) */
@@ -184,6 +190,126 @@ body.atlas-panel-open .atlas-panel-toggle {
   border-radius: 10px;
 }
 
+/* ==========================================================================
+   PANELES PRINCIPALES CON EFECTO SUPER TRANSPARENTE (poco blur)
+   ========================================================================== */
+.atlas-topbar,
+.atlas-left-rail,
+.atlas-right-context,
+.atlas-bottom-tray {
+  background: var(--color-panel-glass) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1) !important;
+  position: relative;
+}
+
+/* Efecto hover un poco más sólido pero sigue transparente */
+.atlas-left-rail:hover,
+.atlas-right-context:hover,
+.atlas-topbar:hover,
+.atlas-bottom-tray:hover {
+  background: var(--color-panel-glass-strong) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Brillo superior muy sutil (opcional, para un toque elegante) */
+.atlas-topbar::before,
+.atlas-left-rail::before,
+.atlas-right-context::before,
+.atlas-bottom-tray::before,
+.atlas-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Tarjetas internas aún más transparentes, sin blur extra para no tapar el modelo */
+.atlas-card {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(1px) !important;
+  -webkit-backdrop-filter: blur(1px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.25s ease !important;
+  margin-top: 16px;
+  padding: 16px;
+  position: relative;
+}
+
+/* Mejora radical del contraste del texto para que sea legible sobre fondo transparente */
+.atlas-card,
+.atlas-left-rail,
+.atlas-right-context,
+.atlas-topbar,
+.atlas-bottom-tray {
+  color: var(--color-text-dark);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5);
+  font-weight: 500; /* Un poco más de peso ayuda a la legibilidad */
+}
+
+/* Para títulos, aún más contraste */
+.atlas-card h3,
+.atlas-title {
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+/* Si hay fondos de elementos internos (selects, botones, etc.) asegurar que sean opacos o semi para contraste */
+.atlas-select,
+.atlas-btn,
+.atlas-status,
+.atlas-quiz-stem,
+.atlas-quiz-helper,
+.atlas-quiz-progress,
+.atlas-quiz-suggestions {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(4px);
+  color: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Ajustes específicos para botones para que mantengan buen contraste */
+.atlas-btn {
+  background: var(--color-primary) !important;
+  color: white !important;
+  text-shadow: none;
+}
+.atlas-btn-secondary {
+  background: rgba(226, 232, 240, 0.9) !important;
+  color: var(--color-text-soft) !important;
+}
+.atlas-btn-hands {
+  background: var(--color-success) !important;
+}
+
+/* Scrollbar personalizado para paneles glass */
+.atlas-left-rail::-webkit-scrollbar-track,
+.atlas-right-context::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+.atlas-left-rail::-webkit-scrollbar-thumb,
+.atlas-right-context::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 20px;
+}
+
+/* ==========================================================================
+   Estilos originales de disposición (sin cambios en estructura)
+   ========================================================================== */
 .atlas-topbar {
   position: absolute;
   top: 20px;
@@ -196,11 +322,6 @@ body.atlas-panel-open .atlas-panel-toggle {
   gap: 14px;
   pointer-events: auto;
   padding: 14px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: var(--color-panel);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-md);
 }
 
 .atlas-topbar-system .atlas-select {
@@ -222,7 +343,7 @@ body.atlas-panel-open .atlas-panel-toggle {
   font-weight: 600;
   border: 1px solid var(--color-border);
   color: var(--color-text-soft);
-  background: #f8fafc;
+  background: rgba(248, 250, 252, 0.8);
 }
 
 .atlas-mode-tab-active {
@@ -249,11 +370,6 @@ body.atlas-panel-open .atlas-panel-toggle {
   gap: 10px;
   pointer-events: auto;
   padding: 14px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: var(--color-panel);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-md);
 }
 
 .atlas-left-rail .atlas-btn {
@@ -262,6 +378,11 @@ body.atlas-panel-open .atlas-panel-toggle {
 
 .atlas-left-rail .atlas-status {
   margin-top: 2px;
+  max-width: 100%;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  box-sizing: border-box;
 }
 
 .atlas-main-canvas {
@@ -277,11 +398,6 @@ body.atlas-panel-open .atlas-panel-toggle {
   overflow-y: auto;
   pointer-events: auto;
   padding: 14px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: var(--color-panel);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-md);
 }
 
 .atlas-right-context > .atlas-card:first-child {
@@ -338,14 +454,11 @@ body.atlas-panel-open .atlas-panel-toggle {
   margin-bottom: 6px;
 }
 
-/* Select */
+/* Select - ya tiene fondo opaco arriba, pero aquí dejamos la estructura */
 .atlas-select {
   width: 100%;
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
-  background: white;
-  color: var(--color-text-dark);
   font-family: var(--font-sans);
   font-size: 0.85rem;
   margin-bottom: 20px;
@@ -372,8 +485,6 @@ body.atlas-panel-open .atlas-panel-toggle {
   border: none;
   border-radius: 40px;
   padding: 10px 16px;
-  background: var(--color-primary);
-  color: white;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
@@ -385,19 +496,17 @@ body.atlas-panel-open .atlas-panel-toggle {
 }
 .atlas-btn:hover {
   transform: translateY(-1px);
-  background: var(--color-primary-light);
   box-shadow: 0 6px 14px rgba(59, 130, 246, 0.25);
 }
 .atlas-btn:active {
   transform: translateY(1px);
 }
 .atlas-btn-secondary {
-  background: #e2e8f0;
+  background: rgba(226, 232, 240, 0.9);
   color: var(--color-text-soft);
 }
 .atlas-btn-secondary:hover {
-  background: #cbd5e1;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background: rgba(203, 213, 225, 0.9);
 }
 .atlas-btn-active {
   background: var(--color-danger);
@@ -423,10 +532,9 @@ body.atlas-panel-open .atlas-panel-toggle {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12' /%3E%3C/svg%3E");
 }
 
-/* Status messages */
+/* Status messages - fondo semi opaco para contraste */
 .atlas-status {
   margin-top: 20px;
-  background: #f1f5f9;
   border-radius: var(--radius-sm);
   color: var(--color-text-soft);
   padding: 12px 16px;
@@ -434,6 +542,11 @@ body.atlas-panel-open .atlas-panel-toggle {
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: 100%;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  box-sizing: border-box;
 }
 .atlas-status::before {
   content: "";
@@ -445,24 +558,14 @@ body.atlas-panel-open .atlas-panel-toggle {
   background-size: contain;
 }
 .atlas-status-error {
-  background: #fef2f2;
+  background: rgba(254, 242, 242, 0.9);
   color: #b91c1c;
 }
 .atlas-status-error::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ef4444' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' /%3E%3C/svg%3E");
 }
 
-/* Tarjetas informativas */
-.atlas-card {
-  margin-top: 20px;
-  background: white;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  font-size: 0.8rem;
-  transition: all 0.2s;
-}
-
+/* Tarjetas informativas - ya definidas arriba, aquí solo complemento */
 .atlas-card > div,
 .atlas-card > p {
   margin-top: 6px;
@@ -505,7 +608,7 @@ body.atlas-panel-open .atlas-panel-toggle {
   margin-top: 8px;
   padding: 8px 10px;
   border-radius: 10px;
-  background: #f8fafc;
+  background: rgba(248, 250, 252, 0.9);
   border: 1px solid var(--color-border);
   color: var(--color-text-soft);
 }
@@ -554,13 +657,13 @@ body.atlas-panel-open .atlas-panel-toggle {
 }
 
 .atlas-quiz-progress {
-  background: #ecfeff;
+  background: rgba(236, 254, 255, 0.9);
   color: #0f766e;
   border: 1px solid #a5f3fc;
 }
 
 .atlas-quiz-suggestions {
-  background: #fffbeb;
+  background: rgba(255, 251, 235, 0.9);
   color: #92400e;
   border: 1px solid #fcd34d;
 }
@@ -610,7 +713,7 @@ body.atlas-panel-open .atlas-panel-toggle {
   margin-top: 12px;
   padding: 10px 12px;
   border-radius: 14px;
-  background: #f1f5f9;
+  background: rgba(241, 245, 249, 0.9);
   border: 1.5px solid var(--color-primary-soft);
   color: var(--color-text-dark);
   font-size: 0.9rem;
@@ -634,16 +737,18 @@ body.atlas-panel-open .atlas-panel-toggle {
 /* --- Fin mejoras quiz --- */
 
 /* ==========================================================================
-   Webcam overlay – Minimal & elegant
+   Webcam overlay – Transparente pero legible
    ========================================================================== */
 #webcam-overlay {
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  left: 24px !important;
+  right: auto !important;
   z-index: var(--z-webcam);
   width: 220px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
@@ -676,7 +781,7 @@ body.atlas-panel-open .atlas-panel-toggle {
   font-size: 0.7rem;
   text-align: center;
   padding: 6px 10px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   white-space: nowrap;
   overflow: hidden;
@@ -709,14 +814,9 @@ body.atlas-panel-open .atlas-panel-toggle {
 }
 
 /* ==========================================================================
-   Responsive (mobile friendly)
+   Responsive (mobile friendly) – ajustado para glass transparente
    ========================================================================== */
 @media (max-width: 720px) {
-  body.atlas-panel-open .atlas-panel-toggle {
-    left: auto;
-    right: 12px;
-  }
-
   .atlas-panel {
     inset: 0;
   }
@@ -765,20 +865,7 @@ body.atlas-panel-open .atlas-panel-toggle {
     max-height: 180px;
   }
 
-  body.atlas-panel-open .atlas-panel-toggle {
-    left: auto;
-    right: 12px;
-  }
-
-  #webcam-overlay {
-    bottom: 12px;
-    right: 12px;
-    width: 180px;
-  }
-  .atlas-panel-toggle {
-    top: 12px;
-    left: 12px;
-  }
+  /* La posicion del toggle en movil tambien se calcula desde JS */
 }
 
 /* ==========================================================================

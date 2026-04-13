@@ -141,14 +141,37 @@ export function createUIPanel(systems) {
   `;
   document.body.appendChild(togglePanelBtn);
 
+  const positionToggleBelowLeftRail = () => {
+    const leftRail = container.querySelector(".atlas-left-rail");
+    if (!leftRail) return;
+
+    const railRect = leftRail.getBoundingClientRect();
+    const spacing = 12;
+    const buttonSize = 44;
+    const viewportMargin = 12;
+
+    let top = railRect.bottom + spacing;
+    top = Math.min(top, window.innerHeight - buttonSize - viewportMargin);
+    top = Math.max(top, viewportMargin);
+
+    let left = railRect.left;
+    left = Math.min(left, window.innerWidth - buttonSize - viewportMargin);
+    left = Math.max(left, viewportMargin);
+
+    togglePanelBtn.style.top = `${Math.round(top)}px`;
+    togglePanelBtn.style.left = `${Math.round(left)}px`;
+  };
+
   const syncPanelState = () => {
     const isOpen = !container.classList.contains("atlas-panel-hidden");
     document.body.classList.toggle("atlas-panel-open", isOpen);
     togglePanelBtn.classList.toggle("atlas-panel-toggle-active", isOpen);
     togglePanelBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    positionToggleBelowLeftRail();
   };
 
   syncPanelState();
+  window.addEventListener("resize", positionToggleBelowLeftRail);
 
   togglePanelBtn.addEventListener("click", () => {
     container.classList.toggle("atlas-panel-hidden");
@@ -174,6 +197,7 @@ export function createUIPanel(systems) {
     const status = container.querySelector("#statusBox");
     status.textContent = text;
     status.classList.toggle("atlas-status-error", Boolean(isError));
+    positionToggleBelowLeftRail();
   }
 
   function setLabelsButtonState(visible) {
